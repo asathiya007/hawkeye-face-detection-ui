@@ -12,8 +12,8 @@ const Logo = () => {
                 </div>
             </Tilt>
             <div className="title-header">
-                <h1 className="f1">HawkEye Face Detection</h1>
-                <p>By Akshay Sathiya</p>
+                <h1 className="f1 mt2">HawkEye Face Detection</h1>
+                <p className="f4">By Akshay Sathiya</p>
             </div>
         </div>
     );

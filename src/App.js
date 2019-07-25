@@ -5,6 +5,7 @@ import SignIn from "./components/SignIn/SignIn";
 import Register from "./components/Register/Register";
 import Particles from 'react-particles-js';
 import Logo from "./components/Logo/Logo";
+import Rank from "./components/Rank/Rank";
 
 class App extends React.Component {
   constructor() {
@@ -34,7 +35,7 @@ class App extends React.Component {
         return (
           <div>
             <Logo />
-            
+            <Rank />
           </div>
         )
       }

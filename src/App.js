@@ -3,6 +3,7 @@ import './App.css';
 import Navigation from "./components/Navigation/Navigation";
 import SignIn from "./components/SignIn/SignIn";
 import Register from "./components/Register/Register";
+import Particles from 'react-particles-js';
 
 class App extends React.Component {
   constructor() {
@@ -33,6 +34,28 @@ class App extends React.Component {
 
     return (
       <div className="App">
+        <Particles className="particles"
+          params={{
+            particles: {
+              number: {
+                value: 80,
+                density: {
+                  enable: true,
+                  value_area: 800
+                }
+              },
+              size: {
+                value: 9
+              },
+              line_linked: {
+                width: 3
+              },
+              move: {
+                speed: 7
+              }
+            }
+          }} />
+
         <Navigation route={route} onRouteChange={this.onRouteChange}/>
         {displayContent(route)}
       </div>

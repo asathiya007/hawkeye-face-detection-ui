@@ -6,12 +6,16 @@ import Register from "./components/Register/Register";
 import Particles from 'react-particles-js';
 import Logo from "./components/Logo/Logo";
 import Rank from "./components/Rank/Rank";
+import ImageLinkForm from "./components/ImageLinkForm/ImageLinkForm";
+import FaceRecognition from "./components/FaceRecognition/FaceRecognition";
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      route: "home"
+      route: "home",
+      input: "",
+      imageUrl: ""
     }
   }
 
@@ -19,8 +23,16 @@ class App extends React.Component {
     this.setState({route: route});
   }
 
+  onInputChange = (event) => {
+    this.setState({input: event.target.value});
+  }
+
+  onPictureSubmit = (event) => {
+    this.setState({imageUrl: this.state.input}); 
+  }
+
   render() {
-    const {route} = this.state;
+    const {route, imageUrl} = this.state;
 
     const displayContent = (route) => {
       if (route === "signin") {
@@ -36,6 +48,8 @@ class App extends React.Component {
           <div>
             <Logo />
             <Rank />
+            <ImageLinkForm onInputChange={this.onInputChange} onPictureSubmit={this.onPictureSubmit}/>
+            <FaceRecognition imageUrl={imageUrl}/>
           </div>
         )
       }

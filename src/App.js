@@ -4,12 +4,13 @@ import Navigation from "./components/Navigation/Navigation";
 import SignIn from "./components/SignIn/SignIn";
 import Register from "./components/Register/Register";
 import Particles from 'react-particles-js';
+import Logo from "./components/Logo/Logo";
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      route: "signin"
+      route: "home"
     }
   }
 
@@ -29,6 +30,13 @@ class App extends React.Component {
         return (
           <Register onRouteChange={this.onRouteChange} />
         );
+      } else if (route === "home") {
+        return (
+          <div>
+            <Logo />
+            
+          </div>
+        )
       }
     }
 

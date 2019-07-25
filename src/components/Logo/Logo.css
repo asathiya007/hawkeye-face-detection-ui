@@ -1,0 +1,14 @@
+.Tilt {
+    background-color: white;
+}
+
+.split {
+    display: flex;
+    justify-content: space-between;
+}
+
+.title-header {
+    width: 60%;
+    margin-right: 22%;
+    padding-left: 5%;
+}

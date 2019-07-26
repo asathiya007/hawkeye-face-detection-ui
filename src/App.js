@@ -21,8 +21,21 @@ class App extends React.Component {
       route: "signin",
       input: "",
       imageUrl: "",
-      boxes: []
+      boxes: [],
+      user: {
+        id: "",
+        name: "",
+        email: "",
+        entries: 0,
+        joined: new Date()
+      }
     }
+  }
+
+  loadUser = (user) => {
+    this.setState({input: ""});
+    this.setState({imageUrl: ""});
+    this.setState({user: user});
   }
 
   onRouteChange = (route) => {
@@ -60,28 +73,42 @@ class App extends React.Component {
   onPictureSubmit = (event) => {
     this.setState({imageUrl: this.state.input});
     app.models.predict(Clarifai.FACE_DETECT_MODEL, this.state.input).then(
-      response => this.displayBoxes(this.calculateFaceLocations(response)),
+      response => {
+        if (response.outputs) {
+          this.displayBoxes(this.calculateFaceLocations(response));
+          fetch("http://localhost:3001/image", {
+            method: "put",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              id: this.state.user.id
+            })
+          })
+            .then(res => res.json())
+            .then(count => this.setState(Object.assign(this.state.user, { entries: count })))
+            .catch(console.log);
+        }
+      },
       err => console.log("error in processing photo", err)
     );
   }
 
   render() {
-    const {route, imageUrl, boxes} = this.state;
+    const {route, imageUrl, boxes, user} = this.state;
 
     const displayContent = (route) => {
       if (route === "signin") {
         return (
-          <SignIn onRouteChange={this.onRouteChange}/>
+          <SignIn onRouteChange={this.onRouteChange} loadUser={this.loadUser}/>
         );
       } else if (route === "register") {
         return (
-          <Register onRouteChange={this.onRouteChange} />
+          <Register onRouteChange={this.onRouteChange} loadUser={this.loadUser}/>
         );
       } else if (route === "home") {
         return (
           <div>
             <Logo />
-            <Rank />
+            <Rank name={user.name} entries={user.entries} />
             <ImageLinkForm onInputChange={this.onInputChange} onPictureSubmit={this.onPictureSubmit}/>
             <FaceRecognition imageUrl={imageUrl} boxes={boxes}/>
           </div>

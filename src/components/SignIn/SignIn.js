@@ -18,7 +18,7 @@ class SignIn extends React.Component {
     }
 
     onSignIn = () => {
-        fetch("http://localhost:3001/signin", {
+        fetch("https://hawkeye-api-asathiya.herokuapp.com/signin", {
             method: "post",
             headers: {"Content-Type": "application/json"},
             body: JSON.stringify({

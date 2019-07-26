@@ -76,7 +76,7 @@ class App extends React.Component {
       response => {
         if (response.outputs) {
           this.displayBoxes(this.calculateFaceLocations(response));
-          fetch("http://localhost:3001/image", {
+          fetch("https://hawkeye-api-asathiya.herokuapp.com/image", {
             method: "put",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

@@ -32,6 +32,10 @@ class App extends React.Component {
     }
   }
 
+  componentDidMount() {
+    fetch("https://hawkeye-api-asathiya.herokuapp.com/");
+  }
+
   loadUser = (user) => {
     this.setState({input: ""});
     this.setState({imageUrl: ""});
